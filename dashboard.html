@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TaskFlow – Dashboard</title>
+
+  <!-- TailwindCSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Scripts (order matters) -->
+  <script defer src="js/dashboard.js"></script>
+  <script defer src="js/board.js"></script>
+  <script defer src="js/insights.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+
+  <header class="flex justify-between items-center px-6 py-4 border-b border-gray-700">
+    <h1 class="text-2xl font-extrabold tracking-tight">
+      TaskFlow <span class="text-sm font-normal text-gray-300">– Team Dashboard</span>
+    </h1>
+    <nav class="flex items-center gap-4 text-sm">
+      <a href="index.html" class="hover:underline">＋ Create Ticket</a>
+    </nav>
+  </header>
+
+  <main class="px-6 py-6 space-y-8">
+    <!-- Top Stats -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="stat-card">
+        <p class="stat-label">Total Tickets</p>
+        <p id="statTotal" class="stat-value">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">In Progress</p>
+        <p id="statProgress" class="stat-value">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Testing</p>
+        <p id="statTesting" class="stat-value">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Done</p>
+        <p id="statDone" class="stat-value">0</p>
+      </div>
+    </section>
+
+    <!-- Kanban Board -->
+    <section>
+      <h2 class="text-xl font-semibold mb-3">Kanban Board</h2>
+      <p class="text-xs text-gray-400 mb-3">
+        Click a ticket to move it: <span class="italic">To Do → In Progress → Testing → Done</span>
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="board-column" id="todo">
+          <h3 class="column-title">To Do</h3>
+        </div>
+        <div class="board-column" id="progress">
+          <h3 class="column-title">In Progress</h3>
+        </div>
+        <div class="board-column" id="testing">
+          <h3 class="column-title">Testing</h3>
+        </div>
+        <div class="board-column" id="done">
+          <h3 class="column-title">Done</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart + Quote -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <!-- Chart -->
+      <div class="bg-gray-800 rounded-xl p-4 shadow-md">
+        <h2 class="text-lg font-semibold mb-3">Ticket Status Overview</h2>
+        <canvas id="statusChart"></canvas>
+      </div>
+
+      <!-- Developer Insights -->
+      <div class="bg-gray-800 rounded-xl p-4 shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Developer Motivation</h2>
+        <p id="quote" class="text-sm italic text-green-300 min-h-[60px]">
+          Loading quote...
+        </p>
+        <button
+          id="refreshQuoteBtn"
+          class="mt-4 text-xs bg-green-500 text-gray-900 px-3 py-1 rounded hover:bg-green-400 transition"
+        >
+          Refresh Quote
+        </button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
