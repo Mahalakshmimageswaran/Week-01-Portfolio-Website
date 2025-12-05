@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Fetch and display a motivational/developer quote
 function fetchDevQuote() {
     return __awaiter(this, void 0, void 0, function* () {
         const quoteEl = document.getElementById("quote");
@@ -15,28 +14,22 @@ function fetchDevQuote() {
             return;
         try {
             quoteEl.textContent = "Loading quote...";
-            // API to fetch random quote
-            const response = yield fetch("https://dummyjson.com/quotes/random");
-            const data = yield response.json();
-            // Some APIs have different field names so we support all
+            const res = yield fetch("https://dummyjson.com/quotes/random");
+            const data = yield res.json();
             const quote = data.quote || data.text || data.content || "Stay motivated, keep coding!";
             const author = data.author || "Unknown";
             quoteEl.textContent = `"${quote}" — ${author}`;
         }
-        catch (error) {
+        catch (_a) {
             quoteEl.textContent = "Could not load quote. Please try again.";
         }
     });
 }
-// Handle button click to refresh quote
 function setupQuoteRefreshButton() {
     const btn = document.getElementById("refreshQuoteBtn");
     if (!btn)
         return;
-    btn.addEventListener("click", () => {
-        fetchDevQuote();
-    });
+    btn.addEventListener("click", fetchDevQuote);
 }
-// Run automatically when Dashboard loads
 fetchDevQuote();
 setupQuoteRefreshButton();

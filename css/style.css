@@ -1,9 +1,10 @@
+/* Smooth scrolling + default font */
 body {
   scroll-behavior: smooth;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Reusable dashboard cards */
+/* ---------------- Dashboard Cards ---------------- */
 .stat-card {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   border-radius: 0.75rem;
@@ -21,7 +22,7 @@ body {
   font-weight: 800;
 }
 
-/* Board columns */
+/* ---------------- Kanban Columns ---------------- */
 .board-column {
   background-color: #111827;
   border-radius: 0.75rem;
@@ -37,7 +38,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Ticket cards */
+/* ---------------- Ticket Cards ---------------- */
 .ticket-card {
   background: #1d4ed8;
   color: white;
@@ -56,4 +57,24 @@ body {
 .ticket-meta {
   font-size: 0.65rem;
   opacity: 0.85;
+}
+
+/* ---------------- Create Ticket Page Styling ---------------- */
+form label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+form input,
+form textarea,
+form select {
+  background: white;
+}
+#recentTickets p {
+  font-size: 0.85rem;
+}
+
+/* General button smooth hover */
+button,
+a {
+  transition: 0.15s ease;
 }

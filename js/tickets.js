@@ -1,12 +1,9 @@
-// js/tickets.js
-
 const ticketForm = document.getElementById("ticketForm");
 const recentTicketsContainer = document.getElementById("recentTickets");
 
 function loadTickets() {
   return JSON.parse(localStorage.getItem("tickets") || "[]");
 }
-
 function saveTickets(tickets) {
   localStorage.setItem("tickets", JSON.stringify(tickets));
 }
@@ -22,20 +19,15 @@ function renderRecentTickets() {
   }
 
   const latest = tickets.slice(-5).reverse();
-
   latest.forEach((t) => {
     const div = document.createElement("div");
     div.className = "border-b pb-1 mb-1 flex justify-between items-center";
     div.innerHTML = `
       <div>
         <p class="font-medium text-gray-800">${t.title}</p>
-        <p class="text-xs text-gray-500">
-          ${t.type} • ${t.priority} • ${t.status}
-        </p>
+        <p class="text-xs text-gray-500">${t.type} • ${t.priority} • ${t.status}</p>
       </div>
-      <span class="text-[10px] px-2 py-1 rounded bg-blue-100 text-blue-700">
-        #${t.id.toString().slice(-4)}
-      </span>
+      <span class="text-[10px] px-2 py-1 rounded bg-blue-100 text-blue-700">#${t.id.toString().slice(-4)}</span>
     `;
     recentTicketsContainer.appendChild(div);
   });
@@ -51,14 +43,10 @@ if (ticketForm) {
     const assignee = document.getElementById("assignee").value.trim();
     const description = document.getElementById("description").value.trim();
 
-    if (!title) {
-      alert("Title is required.");
-      return;
-    }
+    if (!title) return alert("Title is required.");
 
     const tickets = loadTickets();
-
-    const newTicket = {
+    tickets.push({
       id: Date.now(),
       title,
       type,
@@ -67,17 +55,13 @@ if (ticketForm) {
       description,
       status: "To Do",
       createdAt: new Date().toISOString()
-    };
+    });
 
-    tickets.push(newTicket);
     saveTickets(tickets);
-
     ticketForm.reset();
     alert("Ticket created successfully!");
     renderRecentTickets();
   });
 }
 
-if (recentTicketsContainer) {
-  renderRecentTickets();
-}
+if (recentTicketsContainer) renderRecentTickets();
